@@ -13,7 +13,6 @@ class Cathedral(BaseModel):
     website = Column(String)
     latitude = Column(String)
     longitude = Column(String)
-    denomination = Column(String)
     commissioned_by = Column(String)
     dimensions = Column(String)
     architectural_style = Column(String)

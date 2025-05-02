@@ -4,21 +4,32 @@ from argparse import Namespace, ArgumentParser
 import colorlog
 import os
 from config import Config
+from scraper import Crawler
 from utils.migration import run_migration
 import asyncio
 
 logger = colorlog.getLogger("main")
 
 
-async def main(args: Namespace):
+def main(args: Namespace):
     logger.info(args.working_dir)
     config = Config(args)
     logger.info(config)
-    await init(config)
+    init(args, config)
+
+    logger.info(args.worker)
+    if args.worker == "crawler":
+        logger.info(f"Running: {args.worker}")
+        crawler = Crawler(config)
+    else:
+        logger.info(f"Running other: {args.worker}")
 
 
-async def init(config: Config):
-    run_migration(config.db)
+def init(args: Namespace, config: Config):
+    if args.migrate:
+        logger.info("Beginning running migrations")
+        # run_migration(config.db)
+        logger.info("Completed running migrations")
 
 
 # Press the green button in the gutter to run the script.
@@ -29,5 +40,7 @@ if __name__ == '__main__':
     default_path = os.path.expanduser("~/")
     parser.add_argument('-c', '--config', required=True, help="Path to config")
     parser.add_argument('-wd', '--working_dir', default=default_path, help="Temporary working directory")
+    parser.add_argument('-w', '--worker', default="crawler", choices={"crawler", "processor"})
+    parser.add_argument("-m", "--migrate", action="store_true", help="Run database migrations.")
 
-    asyncio.run(main(parser.parse_args(sys.argv[1:])))
+    main(parser.parse_args(sys.argv[1:]))

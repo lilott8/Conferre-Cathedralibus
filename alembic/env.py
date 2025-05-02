@@ -1,6 +1,7 @@
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
+import colorlog
 
 from models import BaseModel
 
@@ -12,7 +13,6 @@ fileConfig(alembic_config.config_file_name)
 
 # Inject DB URL from HOCON config
 # alembic_config.set_main_option('sqlalchemy.url', config['database']['url'])
-
 target_metadata = BaseModel.metadata
 
 

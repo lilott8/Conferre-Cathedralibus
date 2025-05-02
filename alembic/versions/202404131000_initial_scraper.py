@@ -47,7 +47,7 @@ def upgrade():
         sa.Column("url", sa.String(), unique=True, nullable=False),
         sa.Column('domain', sa.String()),
         sa.Column("relevance", sa.Float()),
-        # sa.Column("status", crawl_status),
+        sa.Column("status", sa.String()),
         sa.Column("status", sa.String()),
         sa.Column('last_attempt', sa.String(), nullable=True)
     )
