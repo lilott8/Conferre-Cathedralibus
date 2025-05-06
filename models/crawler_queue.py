@@ -3,15 +3,15 @@ from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
 import enum
 
 
-class CrawlStatus(enum.Enum):
+class CrawlerStatus(enum.Enum):
     pending = "pending"
     in_progress = "in_progress"
     done = "done"
     failed = "failed"
 
 
-class ScraperQueue(BaseModel):
-    __tablename__ = "scrape_queue"
+class CrawlerQueue(BaseModel):
+    __tablename__ = "enqueue"
     id = Column(Integer, primary_key=True)
     url = Column(String, unique=True, nullable=False)
     domain = Column(String)

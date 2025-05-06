@@ -14,7 +14,7 @@ class Config(object):
 
         conf = ConfigFactory.parse_file(args.config)
         self.db = Database(conf.get("db"))
-        self.scraper = Scraper(conf.get("scraper"))
+        self.scraper = Scraper(conf.get("crawler"))
 
     def __repr__(self):
         return f"Database: {self.db}\t Scraper: {self.scraper}"

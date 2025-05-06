@@ -4,7 +4,7 @@ from argparse import Namespace, ArgumentParser
 import colorlog
 import os
 from config import Config
-from scraper import Crawler
+from crawler import Crawler
 from utils.migration import run_migration
 import asyncio
 
